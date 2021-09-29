@@ -1,1 +1,1 @@
-web: gunicorn runme:app
+web: gunicorn runme:weather_app
