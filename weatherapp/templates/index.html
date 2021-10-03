@@ -1,6 +1,29 @@
 {%extends 'base.html'%}
 
 {%block content%}
+
+
+
+<!--ALERT SECTION -  RETURNS ERROR MESSAGE AND SUCCESS MESSAGES -->
+<div class="container d-flex justify-content-center content text-small">
+    <div class="col-md-8">
+
+        {%with messages = get_flashed_messages(with_categories = true) %}
+        {%if messages%}
+        {%for category, message in messages%}
+        <div class=" my-alert alert alert-{{category}}">
+            {{message}}
+        </div>
+        {%endfor%}
+        {%endif%}
+        {%endwith%}
+
+    </div>
+</div>
+
+
+
+
 <div class="container border-info border-rounded-3">
     <div class="row">
 
@@ -11,7 +34,7 @@
 
                     <p class="card-text"> Country : {{weather.country}} &nbsp | &nbsp <img src="{{weather.icon}}"> </p>
                     <p class="card-text">Temperature : {{weather.temperature}}&nbsp |</p>
-                    
+
                     <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
                 </div>
             </div>
