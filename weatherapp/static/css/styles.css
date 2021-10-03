@@ -7,7 +7,79 @@ body {
 }
 
 .container{
-    padding: 20px;
-    margin-top: 10px;
+            padding: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+    /* margin-top: 10px; */
+   
 
+}
+
+    .navbar{
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color:rgb(237, 238, 237);
+}
+
+.search-field{
+    padding-left :10px;
+}
+
+.temp{
+    font-size: x-large;
+}
+.text-xsmall{
+    font-size: x-small;
+}
+
+.text-medium{
+    font-size: medium;
+}
+
+.text-small{
+    font-size: small;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.text-xxlarge{
+    font-size: xx-large;
+}
+.modal-footer{
+    font-size: medium;
+    text-justify: left;
+}
+
+
+.modal-form{
+    margin:auto;
+    margin-left:10px
+}
+
+.modal-dialog{
+    width:300px
+}
+
+.datetime{
+    color:teal;
+    font-weight: bold;
+    
+}
+
+.toast{
+    position: absolute; 
+    bottom: 10px; 
+    right: 10px;
+    background-color:teal;
+}
+
+
+.my-alert{
+    padding:3px;
+    /* padding:20px;
+    position:fixed;
+    top:30px;
+    right:40%;
+    height: 20px; */
+    
 }

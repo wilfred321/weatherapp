@@ -1,25 +1,99 @@
 {%extends 'base.html'%}
 
 {%block content%}
+
+
+<div class="container my-alert text-xsmall">
+    <div class="col-md-4">
+
+        {%with messages = get_flashed_messages(with_categories = true) %}
+        {%if messages%}
+        {%for category, message in messages%}
+        <div class="alert alert-{{category}}">
+            {{message}}
+        </div>
+        {%endfor%}
+        {%endif%}
+        {%endwith%}
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="container border-info border-rounded-3">
     <div class="row">
         <div class="col-sm-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{city}}</h5>
-                    
-                    <p class="card-text"> Country : {{country}} &nbsp | &nbsp Cloud : {{cloud}}% </p>
-                    <p class="card-text">Temperature : {{temperature}}&nbsp | &nbsp Humidity:   </p>
-                    <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
+                    <p class="text-small datetime padding-0">{{current_datetime.strftime('%Y-%m-%d | %H: %M' )}}</p>
+                    <h5 class="card-title">{{city}} </h5>
+
+                    <span class="card-text text-xxlarge">{{temperature}} <small
+                            class='text-medium'>&#176{{unit_symbol}}</small>
+                        &nbsp&nbsp&nbsp
+                        <span class="badge rounded-pill bg-warning text-dark text-xsmall">{{description}}</span>
+                    </span>
+                    <p class="card-text"> Country : {{country}} &nbsp | &nbsp Humidity : {{humidity}}% </p>
+                    <!-- <p class="card-text">Temperature : {{temperature}} &nbsp<small>{{unit_symbol}}</small> &nbsp | &nbsp Unit:{{unit}}</p> -->
+                    <!-- <a href="#" class="btn btn-primary btn-sm">See Historic Data</a> -->
                 </div>
+
             </div>
         </div>
         <div class="col-sm-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
+                    <h5 class="card-title">Daily Weather Forcast Notification</h5>
+                    <p class="card-text text-small">Would you like to recieve a daily weather forcast from us? Click
+                        the
+                        subscribe
+                        button below to sign up..</p>
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal"
+                        data-whatever="@mdo">Subscribe</button>
+
+
                 </div>
             </div>
         </div>
@@ -27,9 +101,75 @@
 
 </div>
 
-<br>
-<br>
 
 
-<a href="{{url_for('register')}}" class="btn btn-primary btn-sm" role="button">Go to Register</a>
+
+<!-- SUBSCRIBE MODAL FORM -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-medium" id="exampleModalLabel">New Subscription</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{url_for('subscribe')}}" method='post'>
+                    <div class="form-group">
+                        <label for="subsciber-name" class="col-form-label text-small">Fullname:</label>
+                        <input type="text" class="form-control text-small" name="subscriber-name"
+                            placeholder="e.g John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="subscriber-email" class="col-form-label text-small">Email:</label>
+                        <input class="form-control text-small" name="subscriber-email"
+                            placeholder="e.g johndoe@example.com">
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary btn-sm">Subscribe</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Hourly Forcast Display -->
+
+<div class="card">
+    <div class="card-header">
+        Featured
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Current Exchange Rate</h5>
+        <p class="card-text text-small">Base Currency : {{base_currency}}</p><b>
+
+            <p class="card-text text-small"> Base rate: {{rates}}</p><b>
+                <p class="card-text text-small">Currency : {{currency}}</p><b>
+
+                    <form action="{{url_for('exchange_rate')}}" , method="post">
+                        <!-- <a href="{{url_for('exchange_rate')}}""btn class=btn-primary btn-sm">Get Exchange Rate</a> -->
+                        <!-- <button class="btn btn-primary btn-sm" type="submit">Get Exchange Rate</button> -->
+
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Enter currency"
+                                aria-label="Recipient's username" aria-describedby="button-addon2" name="currency">
+                            <button class="btn btn-primary btn-sm" type="submit" id="button-addon2">Get Exchange
+                                Rate</button>
+                        </div>
+                    </form>
+    </div>
+</div>
+
+
+
+
+
 {%endblock%}
