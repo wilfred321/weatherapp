@@ -3,9 +3,7 @@
 {%block content%}
 
 
-
-<!--ALERT SECTION -  RETURNS ERROR MESSAGE AND SUCCESS MESSAGES -->
-<div class="container d-flex justify-content-center content text-small">
+<div class="container d-flex justify-content-center mx-auto text-small">
     <div class="col-md-8">
 
         {%with messages = get_flashed_messages(with_categories = true) %}
@@ -23,28 +21,79 @@
 
 
 
-
 <div class="container border-info border-rounded-3">
     <div class="row">
+        <div class="col-sm-3">
+            <div class="row mx-auto">
+
+
+                <div class=" container mb-2">
+                    <div class="card">
+                        <div class="location">
+                            <h5>{{weather.city}}</h5>
+                        </div>
+                        <div class="d-flex">
+                            <div class="temperature display-6">{{weather.temperature}}</div>
+                            <div class="unit display">&#176{{weather.unit}}</div>
+                            <div class="weather-icon mx-auto">
+                                <img src="{{weather.icon}}">
+                            </div>
+                        </div>
+                        <div class="weather-description mx-auto text-small">{{weather.description}}</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="location">
+                        <h5>{{weather.city}}</h5>
+                    </div>
+                    <div class="d-flex">
+                        <div class="temperature display-6">{{weather.temperature}}</div>
+                        <div class="unit display">&#176{{weather.unit}}</div>
+                        <div class="weather-icon mx-auto">
+                            <img src="{{weather.icon}}">
+                        </div>
+                    </div>
+                    <div class="weather-description mx-auto text-small">{{weather.description}}</div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
 
         <div class="col-sm-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{weather.city}}</h5>
+                    <h5 class="card-title">Daily Weather Forcast Notification</h5>
+                    <p class="card-text">Would you like to recieve a daily weather forcast from us?
+                        Subscribe
+                        below. This Appication is a one stop shop for all the information you need to have a productive
+                        day every day.</p>
+                    <p class="card-text">We Provide all the information you need covering weather forcast,
+                        exchange rate and calender
+                        events</p>
+                    <a href="{{url_for('download')}}" type="button" class="btn btn-primary btn-sm">Click to learn
+                        more</a>
 
-                    <p class="card-text"> Country : {{weather.country}} &nbsp | &nbsp <img src="{{weather.icon}}"> </p>
-                    <p class="card-text">Temperature : {{weather.temperature}}&nbsp |</p>
 
-                    <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
+
+
+        <div class="col-sm-3">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
+                    <h5 class="card-title mb-3">Daily Weather Forcast Notification</h5>
+                    <p class="card-text text-small">Would you like to recieve a daily weather forcast from us? Subscribe
+                        below</p>
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal"
+                        data-whatever="@mdo">Subscribe</button>
+
+
                 </div>
             </div>
         </div>
@@ -52,9 +101,93 @@
 
 </div>
 
-<br>
-<br>
 
 
-<a href="{{url_for('register')}}" class="btn btn-primary btn-sm" role="button">Go to Register</a>
+
+<!-- SUBSCRIBE MODAL FORM -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-medium" id="exampleModalLabel">New Subscription</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{url_for('subscribe')}}" method='post'>
+                    <div class="form-group">
+                        <label for="subsciber-name" class="col-form-label text-small">Fullname:</label>
+                        <input type="text" class="form-control text-small" name="subscriber-name"
+                            placeholder="e.g John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="subscriber-email" class="col-form-label text-small">Email:</label>
+                        <input class="form-control text-small" name="subscriber-email"
+                            placeholder="e.g johndoe@example.com">
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary btn-sm">Subscribe</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="heading display-6 ">Added Locations</div>
+
+<div class="container">
+
+    <div class="row padding-0 ">
+
+        <div class="col-3">
+            <div class="card m-1">
+                <div class="card-header ">
+                    {{weather.city}}, {{weather.country}}
+                </div>
+                <!-- <div class="card-title">This is the title of the</div> -->
+                <span>
+                    <div class="d-flex justify-content-end"><img src="{{weather.icon}}"></div>
+                    <div class="d-flex justify-content-start">{{weather.temperature}}{{weather.unit}}</div>
+                </span>
+
+                <div class="card-body s1">
+                    This is the body of the card
+                </div>
+            </div>
+
+        </div>
+        <div class="col-3">
+            <div class="card m-1">
+                <div class="card-header ">This is a card</div>
+                <div class="card-title">This is the title of the card</div>
+                <div class="card-body">Here comes the body of the card</div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card m-1">
+                <div class="card-header">This is a card</div>
+                <div class="card-title">This is the title of the card</div>
+                <div class="card-body">Here comes the body of the card</div>
+            </div>
+
+        </div>
+        <div class="col-3">
+            <div class="card m-1">
+                <div class="card-header">This is a card</div>
+                <div class="card-title">This is the title of the card</div>
+                <div class="card-body">Here comes the body of the card</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
 {%endblock%}

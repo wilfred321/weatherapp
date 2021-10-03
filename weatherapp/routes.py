@@ -69,3 +69,12 @@ def index():
 @weather_app.route("/register")
 def register():
     return render_template('register.html',title = 'register')
+
+@weather_app.route("/register")
+def download():
+    pass
+
+
+@weather_app.route("/register")
+def subscribe():
+    pass
