@@ -1,7 +1,7 @@
 
 from requests import status_codes
 from weatherapp import weather_app,requests,json
-from flask import render_template,redirect,request,url_for
+from flask import render_template,redirect,request,url_for,flash
 from weatherapp.config import Config
 
 
@@ -22,19 +22,18 @@ from weatherapp.config import Config
 def index():
 
     apiid = weather_app.config['API_KEY']
-    try:
-        
-        city_name = request.form.get('city')
-        url = f'http://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={apiid}'
+    
+    if request.method != 'POST':
+        city = 'Lagos'
+    else:  
+        city = request.form.get('city')
+    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid={}'
 
-        r = requests.get(url)
-        data = r.json()
-        city = data['name']
-        
-    except:
+    r = requests.get(url.format(city,apiid))
+       
+        # city = data['name']
+    
 
-         message = 'Invalid City Selected'
-         return render_template('index.html', message = message)   
    
 
 #Get Weather for lagos
@@ -46,14 +45,23 @@ def index():
 
         # data = json.loads(r)
         # res = r.status_code
-    else:
-        country = data['sys']['country']
-        clouds = data['clouds']['all']
-        # weather_val = data['weather']['main']
-        temperature = data['main']['temp']
-        code = data['cod']
-        return render_template('index.html',title = 'index',
-        city = city,country=country, cloud = clouds ,temperature = temperature)
+ 
+
+    data = r.json()
+    icon_id = data['weather'][0]['icon']
+    weather = {
+        # 'city':city.capitalize(),
+        'city':data['name'],
+        'temperature':data['main']['temp'],
+        'description':data['weather'][0]['description'],
+        
+        'country':data['sys']['country'],
+        'timezone':data['timezone'], 
+        'icon': f'http://openweathermap.org/img/w/{icon_id}.png'      
+    } 
+
+    return render_template('index.html',title = 'index',
+    weather = weather)
 
 
 

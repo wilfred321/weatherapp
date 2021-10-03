@@ -3,13 +3,15 @@
 {%block content%}
 <div class="container border-info border-rounded-3">
     <div class="row">
+
         <div class="col-sm-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{city}}</h5>
+                    <h5 class="card-title">{{weather.city}}</h5>
+
+                    <p class="card-text"> Country : {{weather.country}} &nbsp | &nbsp <img src="{{weather.icon}}"> </p>
+                    <p class="card-text">Temperature : {{weather.temperature}}&nbsp |</p>
                     
-                    <p class="card-text"> Country : {{country}} &nbsp | &nbsp Cloud : {{cloud}}% </p>
-                    <p class="card-text">Temperature : {{temperature}}&nbsp | &nbsp Humidity:   </p>
                     <a href="#" class="btn btn-primary btn-sm">Go somewhere</a>
                 </div>
             </div>
