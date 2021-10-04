@@ -155,13 +155,20 @@
 # print(city)
 
 import requests
-def get_city_name():
-    url = "http://ipinfo.io/json"
-    try:
-        response = requests.get(url)
-    except Exception:
-            return "Error: Unable to execute request"
-    else:
-        data = response.json()
-        city = data['city']
-        print(city)
+# def get_city_name():
+#     url = "http://ipinfo.io/json"
+#     try:
+#         response = requests.get(url)
+#     except Exception:
+#             return "Error: Unable to execute request"
+#     else:
+#         data = response.json()
+#         return data
+        
+# print(get_city_name())
+
+
+
+
+
+print(get_city_name())
