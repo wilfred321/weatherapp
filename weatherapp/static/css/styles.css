@@ -11,3 +11,104 @@ body {
     margin-top: 10px;
 
 }
+
+body {
+    margin: auto;
+    margin-top: 30px;
+    width: 70%;
+
+}
+
+.container{
+    padding-top:5px;
+    padding-left: 0px;
+    padding-right: 0px;
+    /* margin-top: 10px; */
+   
+
+}
+
+    .navbar{
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color:rgb(237, 238, 237);
+}
+
+.search-field{
+    padding-left :10px;
+}
+
+.text-xsmall{
+    font-size: x-small;
+}
+
+.text-medium{
+    font-size: medium;
+}
+
+.text-small{
+    font-size: small;
+
+
+}
+
+.text-xxlarge{
+    font-size: xx-large;
+}
+.modal-footer{
+    font-size: medium;
+    text-justify: left;
+}
+
+
+.modal-form{
+    margin:auto;
+    margin-left:10px
+}
+
+.modal-dialog{
+    width:300px
+}
+
+.datetime{
+    color:teal;
+    font-weight: bold;
+    
+}
+
+.toast{
+    position: absolute; 
+    bottom: 10px; 
+    right: 10px;
+    background-color:teal;
+}
+
+
+.my-alert{
+    text-align:center;
+    align-content: center;
+    height: 15px;
+       
+}
+
+
+ .s1 {
+    background-color: green;
+}
+
+.weather-icon{
+    float:inline-end;
+}
+    
+.heading{
+    padding: 20px;
+    text-align: center;
+}
+
+.location{
+    padding-left:10px
+}
+.temperature{
+    padding-left:10px
+    
+}
