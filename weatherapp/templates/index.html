@@ -2,22 +2,19 @@
 
 {%block content%}
 
-
-<div class="container d-flex justify-content-center mx-auto text-small">
-    <div class="col-md-8">
-
-        {%with messages = get_flashed_messages(with_categories = true) %}
-        {%if messages%}
-        {%for category, message in messages%}
-        <div class=" my-alert alert alert-{{category}}">
-            {{message}}
-        </div>
-        {%endfor%}
-        {%endif%}
-        {%endwith%}
-
-    </div>
+{%with messages = get_flashed_messages(with_categories = true) %}
+{%if messages%}
+{%for category, message in messages%}
+<div class="my-alert alert alert-{{category}} p-1">
+    <p class=" text-small p-0 m-0 align-middle"> {{message}}</p>
 </div>
+{%endfor%}
+{%endif%}
+{%endwith%}
+
+
+
+
 
 
 
@@ -234,20 +231,20 @@
 </div>
 
 
-<div class="container border rounded-3">
-    <div class="container bg-warning cont1">Container 1</div>
-    <div class="container bg-warning cont2">Container 2</div>
-    <div class="container bg-warning cont3">Container 3</div>
-    <div class="row">
-
-        <!-- <div class="container img">
-        <img src="\static\media\great-egret.jpg">
-
-    </div> -->
-    </div>
-
+<div class="container d-flex justify-content-center my-alert alert alert-warning p-2">
+    <p class=" text-small p-0 m-0 align-middle">Flex item 1. The longest text you can get is this. it is soooooooo . ISS
+        THIS LONG ENOUGHSLFDAFSDFFSDFADFJDFJKFDFDFLDJFSDFDJDFDFLDFJADFFJDFFLJDFAFSDFJKASDAFSDFDFDFASDFDFlong
+    </p>
 </div>
 
+
+<div class=" row">
+
+    <!-- <div class="container img">
+    <img src="\static\media\great-egret.jpg">
+
+</div> -->
+</div>
 
 <div class="heading display-6 ">Containers</div>
 
