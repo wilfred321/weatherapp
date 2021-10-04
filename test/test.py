@@ -1,57 +1,57 @@
-import os
-import smtplib
-from email.message import EmailMessage
-import imghdr
+# import os
+# import smtplib
+# from email.message import EmailMessage
+# import imghdr
 
-msg = EmailMessage()
+# msg = EmailMessage()
 
 
-EMAIL_ADDRESS = os.getenv("EMAIL_USER")
-EMAIL_PASSWORD = os.getenv("EMAIL_PASS")
-EMAIL_RECIPENT = "owobuwilfred@gmail.com"
+# EMAIL_ADDRESS = os.getenv("EMAIL_USER")
+# EMAIL_PASSWORD = os.getenv("EMAIL_PASS")
+# EMAIL_RECIPENT = "owobuwilfred@gmail.com"
 
-msg["Subject"] = "Sending HTML Message"
-msg["From"] = EMAIL_ADDRESS
-msg["To"] = EMAIL_RECIPENT
-msg.set_content("This is a plain text email")
-name = "Wilfred"
-html = """\
-<!DOCTYPE html>
-<html lang="en">
+# msg["Subject"] = "Sending HTML Message"
+# msg["From"] = EMAIL_ADDRESS
+# msg["To"] = EMAIL_RECIPENT
+# msg.set_content("This is a plain text email")
+# name = "Wilfred"
+# html = """\
+# <!DOCTYPE html>
+# <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
+# <head>
+#     <meta charset="UTF-8">
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+#     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+#     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+#     <title>Document</title>
 
-    <style>
-        body {
-            background-color: green;
-        }
+#     <style>
+#         body {
+#             background-color: green;
+#         }
 
-        .btn {
-            height: 50px;
-            border: solid blue 1px;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: large;
-            margin: auto;
-        }
-    </style>
-</head>
+#         .btn {
+#             height: 50px;
+#             border: solid blue 1px;
+#             font-family: Arial, Helvetica, sans-serif;
+#             font-size: large;
+#             margin: auto;
+#         }
+#     </style>
+# </head>
 
-<body>
-    <h1 style="color:grey">This is a simple HTML</h1>
+# <body>
+#     <h1 style="color:grey">This is a simple HTML</h1>
 
-    <div class='form-group'>
-        <button class='btn'>Download Whitepaper</button>
-    </div>
-</body>
+#     <div class='form-group'>
+#         <button class='btn'>Download Whitepaper</button>
+#     </div>
+# </body>
 
-</html>
-    """
-msg.add_alternative(html, subtype="html")
+# </html>
+#     """
+# msg.add_alternative(html, subtype="html")
 
 # files = ["flask_blog.pdf"]
 
@@ -65,13 +65,13 @@ msg.add_alternative(html, subtype="html")
 #     )
 
 
-try:
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
-        smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-        smtp.send_message(msg)
-        print("Your message has been sent successfully")
-except:
-    print("Sorry, Unable to send message!")
+# try:
+#     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+#         smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+#         smtp.send_message(msg)
+#         print("Your message has been sent successfully")
+# except:
+#     print("Sorry, Unable to send message!")
 
 
 # from flask_blog.models import User,Post
@@ -153,3 +153,15 @@ except:
 # print(ip)
 # print(org)
 # print(city)
+
+import requests
+def get_city_name():
+    url = "http://ipinfo.io/json"
+    try:
+        response = requests.get(url)
+    except Exception:
+            return "Error: Unable to execute request"
+    else:
+        data = response.json()
+        city = data['city']
+        print(city)
