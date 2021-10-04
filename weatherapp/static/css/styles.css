@@ -93,7 +93,7 @@ body {
 
 
  .s1 {
-    background-color: green;
+    background-color: #f5f5f5
 }
 
 .weather-icon{
@@ -111,4 +111,21 @@ body {
 .temperature{
     padding-left:10px
     
+}
+
+
+.cont1{
+   
+    width: 100px;
+    height: 100px;
+}
+.cont2{
+   
+    width: 100px;
+    height: 100px;
+}
+.cont3{
+    
+    width: 100px;
+    height: 100px;
 }

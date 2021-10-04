@@ -21,29 +21,28 @@
 
 
 
-<div class="container border-info border-rounded-3">
+<div class="container s1 m-auto border-rounded-5">
     <div class="row">
+
         <div class="col-sm-3">
-            <div class="row mx-auto">
-
-
-                <div class=" container">
-                    <div class="card">
-                        <div class="location">
-                            <h5>{{weather.city}}</h5>
-                        </div>
-                        <div class="d-flex">
-                            <div class="temperature display-6">{{weather.temperature}}</div>
-                            <div class="unit display">&#176{{weather.unit}}</div>
-                            <div class="weather-icon mx-auto">
-                                <img src="{{weather.icon}}">
-                            </div>
-                        </div>
-                        <div class="weather-description mx-auto text-small">{{weather.description}}</div>
-                    </div>
-                </div>
+            <div class="row m-auto">
 
                 <div class="card">
+                    <div class="location">
+                        <h5>{{weather.city}}</h5>
+                    </div>
+                    <div class="d-flex">
+                        <div class="temperature display-6">{{weather.temperature}}</div>
+                        <div class="unit display">&#176{{weather.unit}}</div>
+                        <div class="weather-icon mx-auto">
+                            <img src="{{weather.icon}}">
+                        </div>
+                    </div>
+                    <div class="weather-description mx-auto text-small">{{weather.description}}</div>
+                </div>
+
+
+                <div class="card my-4">
                     <div class="location">
                         <h5>{{weather.city}}</h5>
                     </div>
@@ -70,7 +69,8 @@
                     <h5 class="card-title">Daily Weather Forcast Notification</h5>
                     <p class="card-text">Would you like to recieve a daily weather forcast from us?
                         Subscribe
-                        below. This Appication is a one stop shop for all the information you need to have a productive
+                        below. This Appication is a one stop shop for all the information you need to have a
+                        productive
                         day every day.</p>
                     <p class="card-text">We Provide all the information you need covering weather forcast,
                         exchange rate and calender
@@ -111,19 +111,22 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title text-medium" id="exampleModalLabel">New Subscription</h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
+
+
+
             </div>
             <div class="modal-body">
                 <form action="{{url_for('subscribe')}}" method='post'>
                     <div class="form-group">
-                        <label for="subsciber-name" class="col-form-label text-small">Fullname:</label>
+                        <label for="subsciber-name" class="col-form-label text-small"></label>
                         <input type="text" class="form-control text-small" name="subscriber-name"
                             placeholder="e.g John Doe">
                     </div>
                     <div class="form-group">
-                        <label for="subscriber-email" class="col-form-label text-small">Email:</label>
+                        <label for="subscriber-email" class="col-form-label text-small"></label>
                         <input class="form-control text-small" name="subscriber-email"
                             placeholder="e.g johndoe@example.com">
                     </div>
@@ -140,12 +143,14 @@
 
 <div class="heading display-6 ">Added Locations</div>
 
-<div class="container">
+<div class="container border">
 
-    <div class="row padding-0 ">
+    <div class="row">
 
+
+        <!-- COLUMN 1 -->
         <div class="col-3">
-            <div class="card m-1">
+            <div class="card">
                 <div class="card-header ">
                     {{weather.city}}, {{weather.country}}
                 </div>
@@ -160,24 +165,30 @@
                 </div>
             </div>
 
+
+            <!-- COLUMN 2 -->
         </div>
         <div class="col-3">
-            <div class="card m-1">
+            <div class="card">
                 <div class="card-header ">This is a card</div>
                 <div class="card-title">This is the title of the card</div>
                 <div class="card-body">Here comes the body of the card</div>
             </div>
         </div>
+
+        <!-- COLUMN 3 -->
         <div class="col-3">
-            <div class="card m-1">
+            <div class="card">
                 <div class="card-header">This is a card</div>
                 <div class="card-title">This is the title of the card</div>
                 <div class="card-body">Here comes the body of the card</div>
             </div>
 
+
+            <!-- COLUMN 4 -->
         </div>
         <div class="col-3">
-            <div class="card m-1">
+            <div class="card">
                 <div class="card-header">This is a card</div>
                 <div class="card-title">This is the title of the card</div>
                 <div class="card-body">Here comes the body of the card</div>
@@ -185,7 +196,66 @@
         </div>
     </div>
 
+    <div class="row text-large border mx-auto my-2">
+
+        <div class="col-3 bg-primary p-auto">subtitle what happens when the text is too long. lets find out buddy
+        </div>
+        <div class="col-3 bg-secondary p-auto">subtitle</div>
+        <div class="col-3 bg-info pl-1 p-auto">subtitle</div>
+        <div class="col-3 bg-warning p-auto">subtitle</div>
+    </div>
+
 </div>
+
+<div class="heading display-6 ">Calendar</div>
+<div class="container border border-solid">
+    <p class="text-primary">Level 1 - Parent Border</p>
+    <div class="row border m-auto">
+        Level 2
+    </div>
+
+    <div class="row border m-auto">
+
+
+        <div class="col-sm-6 border m-auto">Column 1 level 3</div>
+        <div class="col-sm-m-auto">Column 2 level 3</div>
+        <!-- <div class="col-sm-3 border-solid">Column 3 level 3</div> -->
+
+    </div>
+
+
+</div>
+
+
+<div class="heading display-6 ">Understanding Containers and Flex in Bootstrap</div>
+
+<div class="jumbotron">
+
+</div>
+
+
+<div class="container border rounded-3">
+    <div class="container bg-warning cont1">Container 1</div>
+    <div class="container bg-warning cont2">Container 2</div>
+    <div class="container bg-warning cont3">Container 3</div>
+    <div class="row">
+
+        <!-- <div class="container img">
+        <img src="\static\media\great-egret.jpg">
+
+    </div> -->
+    </div>
+
+</div>
+
+
+<div class="heading display-6 ">Containers</div>
+
+<div class="heading display-6 ">Containers</div>
+<div class="heading display-6 ">Containers</div>
+<div class="heading display-6 ">Containers</div>
+<div class="heading display-6 ">Containers</div>
+
 
 
 
