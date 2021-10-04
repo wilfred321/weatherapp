@@ -18,13 +18,14 @@ from weatherapp.utils import get_city_name
 
 
 apiid = weather_app.config['API_KEY']
-
+current_city = get_city_name()
 @weather_app.route("/", methods = ['GET','POST'])
 def index():
 
-    
-    city = get_city_name()
-    if request.method == 'POST':
+    if request.method != "POST":
+        city = current_city
+    else:
+        
         city = request.form.get('city')
      
     
@@ -35,8 +36,8 @@ def index():
     r = requests.get(url.format(city,apiid))
 
     data = r.json()
-   
-   
+
+
     icon_id = data['weather'][0]['icon']
     weather = {
     
