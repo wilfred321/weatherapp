@@ -5,14 +5,14 @@
 {%with messages = get_flashed_messages(with_categories = true) %}
 {%if messages%}
 {%for category, message in messages%}
-<div class="my-alert alert alert-{{category}} p-1">
-    <p class=" text-small p-0 m-0 align-middle"> {{message}}</p>
+<div class="container d-flex justify-content-center alert alert-{{category}} p-auto text-wrap"
+    style="width:600px;height:20px">
+    <p class=" text-small p-0 m-0 align-middle "> {{message}}
+    </p>
 </div>
 {%endfor%}
 {%endif%}
 {%endwith%}
-
-
 
 
 
@@ -231,11 +231,7 @@
 </div>
 
 
-<div class="container d-flex justify-content-center my-alert alert alert-warning p-2">
-    <p class=" text-small p-0 m-0 align-middle">Flex item 1. The longest text you can get is this. it is soooooooo . ISS
-        THIS LONG ENOUGHSLFDAFSDFFSDFADFJDFJKFDFDFLDJFSDFDJDFDFLDFJADFFJDFFLJDFAFSDFJKASDAFSDFDFDFASDFDFlong
-    </p>
-</div>
+
 
 
 <div class=" row">

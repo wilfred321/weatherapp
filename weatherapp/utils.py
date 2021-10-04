@@ -1,5 +1,5 @@
 from requests.exceptions import HTTPError
-from weatherapp import socket,json,requests,request
+from weatherapp import json,requests
 
 
 
@@ -12,8 +12,8 @@ def get_city_name():
             return "Error: Unable to execute request"
     else:
         data = response.json()
-        city_name = data['city']
-        return city_name
+        city = data['city']
+        return city
 
     
 
