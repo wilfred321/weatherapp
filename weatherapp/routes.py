@@ -4,7 +4,7 @@ from requests import status_codes
 from weatherapp import weather_app,requests,json,request
 from flask import render_template,redirect,request,url_for,flash
 from weatherapp.config import Config
-from weatherapp.utils import get_current_location
+from weatherapp.utils import get_current_location,send_subscribe_confirm
 
 
 # @weather_app.route("/search", methods = ['GET','POST'])
@@ -74,7 +74,18 @@ def download():
     pass
 
 
-@weather_app.route("/subscribe")
+@weather_app.route("/subscribe", methods = ['GET','POST'])
 def subscribe():
-    pass
+
+    
+    subscriber_username = request.form.get('subscriber-username')
+    subscriber_email = request.form.get('subscriber-email')
+
+    send_subscribe_confirm(subscriber_username,subscriber_email)
+    # save_to_mailing_list()
+    flash('You subscription has been completed successfully','info')
+    return redirect(url_for('index'))
+    
+
+    
 
