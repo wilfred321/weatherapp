@@ -4,7 +4,7 @@ from requests import status_codes
 from weatherapp import weather_app,requests,json,request
 from flask import render_template,redirect,request,url_for,flash
 from weatherapp.config import Config
-from weatherapp.utils import get_current_location,send_subscribe_confirm,get_metric
+from weatherapp.utils import get_current_location, get_metric,send_subscribe_confirm
 
 
 # @weather_app.route("/search", methods = ['GET','POST'])
@@ -21,29 +21,29 @@ from weatherapp.utils import get_current_location,send_subscribe_confirm,get_met
 apiid = weather_app.config['WEATHER_API_KEY']
 current_location = get_current_location()
 
-
-
-
 @weather_app.route("/", methods = ['GET','POST'])
 def index():
 
-    units = request.args.get('temperature_preference')
-    unit_name = get_metric(units)
+    option = request.args.get('option')
 
+    if option == None:
+        unit = 'metric'
+    unit_name = get_metric(unit)
+        
     
+
+
     city = current_location.get('city')
     if request.method == "POST":
         city = request.form.get('city')
-        if city == None or len(city) > 15:
-            flash(f'Search field cannot be blank or more than 15 letters','danger')
-            return redirect(url_for('index'))
+        # if city == "" or len(city) > 15:
+        #     flash(f'Search field cannot be blank or more than 15 letters','danger')
+        #     return redirect(url_for('index'))
 
-    try: 
-       
-        
+    try:
 
         url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid={}&units={}'
-        r = requests.get(url.format(city,apiid,units))
+        r = requests.get(url.format(city,apiid,unit))
         data = r.json()
         city = data['name']
     except:
@@ -60,8 +60,9 @@ def index():
         
         'country':data['sys']['country'],
         'timezone':data['timezone'], 
-        'icon': f'http://openweathermap.org/img/w/{icon_id}.png',  
-        'unit':get_metric(units)  
+        'icon': f'http://openweathermap.org/img/w/{icon_id}.png',
+        'unit':unit_name     
+        
     }
 
     return render_template('index.html',weather=weather, current_location = current_location)
@@ -70,8 +71,8 @@ def index():
 def preferences():
     if request.method == 'POST':
         #get the metric option 
-        option = request.form.get('unit')  
-    return redirect(url_for('index',option=option))   
+        option = request.form.get('temperature_preference')  
+        return redirect(url_for('index',option=option))   
    
   
 
