@@ -173,6 +173,18 @@
 
 # print(get_city_name())
 
-fullname = 'Wilfred Owobu'
-_,lastname = fullname.('/')
-print(lastname)
+# fullname = 'Wilfred Owobu'
+# _,lastname = fullname.('/')
+# print(lastname)
+
+# def switch_metric():
+#     switcher = {
+#         'metric':'Celcius ',
+#         'standard':'Kelvin',
+#         'imperial':'Farenheit',
+#     }  
+
+#     return switcher
+
+# units = switch_metric()
+# print(units.get('metric'))

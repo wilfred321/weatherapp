@@ -19,6 +19,7 @@ from weatherapp.utils import get_current_location,send_subscribe_confirm
 
 
 apiid = weather_app.config['WEATHER_API_KEY']
+units = get_metric()
 current_location = get_current_location()
 
 @weather_app.route("/", methods = ['GET','POST'])
@@ -35,7 +36,7 @@ def index():
     try:
 
         url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid={}'
-        r = requests.get(url.format(city,apiid))
+        r = requests.get(url.format(city,apiid,))
         data = r.json()
         city = data['name']
     except:

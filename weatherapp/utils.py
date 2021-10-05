@@ -55,7 +55,14 @@ def send_subscribe_confirm(username,email):
         
     
          
-       
+def get_metric():
+    switcher = {
+         'metric':'Celcius ',
+         'standard':'Kelvin',
+         'imperial':'Farenheit',
+    }  
+
+    return switcher
 
 
 # def get_city_name():
