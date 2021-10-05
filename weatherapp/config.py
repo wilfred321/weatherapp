@@ -7,7 +7,7 @@ class  Config:
 
     SECRET_KEY = "63f4ce6948a9d40a72191bb94b9c23fb"
 
-    SQLALCHEMY_DATABASE_URI = "sqlite:///site.db"
+    SQLALCHEMY_DATABASE_URI = "sqlite:///weather.db"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     

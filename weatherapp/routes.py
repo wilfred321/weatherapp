@@ -101,9 +101,9 @@ def download():
 def subscribe():
 
     
-    subscriber_username = request.form.get('subscriber-username')
+    subscriber_name = request.form.get('subscriber-name')
     subscriber_email = request.form.get('subscriber-email')
-    firstname,lastname = subscriber_username.capitalize().split(' ')
+    subscriber_name = subscriber_name.capitalize()
     
     try:
         save_email(subscriber_email)
@@ -111,7 +111,7 @@ def subscribe():
         flash('Your email could not be saved. It may already exist','danger')
 
     else:
-        send_subscribe_confirm(firstname,subscriber_email)
+        send_subscribe_confirm(subscriber_name,subscriber_email)
         flash('You subscription has been completed successfully','info')
     return redirect(url_for('index'))
     
