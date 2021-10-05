@@ -4,7 +4,7 @@ from weatherapp import json,requests,weather_app
 
 token = weather_app.config['IP_INFO_KEY']
 
-def get_city_name():
+def get_current_location():
     url = f"http://ipinfo.io/json?token={token}"
     try:
         response = requests.get(url)
@@ -12,8 +12,13 @@ def get_city_name():
             return "Error: Unable to execute request"
     else:
         data = response.json()
-        city = data['region']
-        return city
+
+        location = {
+            'city':data['region'],
+            'country':data['country']
+            }
+
+        return location
 
 
 
