@@ -6,27 +6,9 @@ body {
 
 }
 
-.container{
-    padding: 20px;
-    margin-top: 10px;
 
-}
 
-body {
-    margin: auto;
-    margin-top: 30px;
-    width: 70%;
 
-}
-
-.container{
-    padding-top:5px;
-    padding-left: 0px;
-    padding-right: 0px;
-    /* margin-top: 10px; */
-   
-
-}
 
     .navbar{
     padding-left: 10px;
@@ -92,7 +74,7 @@ body {
 
 
  .s1 {
-    background-color: #f5f5f5
+    background-color: #fafafa
 }
 
 .weather-icon{
@@ -128,3 +110,17 @@ body {
     width: 100px;
     height: 100px;
 } */
+
+
+#hideMeAfter5Seconds {
+    animation: hideAnimation 0s ease-in 5s;
+    animation-fill-mode: forwards;
+  }
+  
+  @keyframes hideAnimation {
+    to {
+      visibility: hidden;
+      width: 0;
+      height: 0;
+    }
+  }

@@ -37,56 +37,30 @@ def index():
         url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid={}'
         r = requests.get(url.format(city,apiid))
         data = r.json()
+        city = data['name']
     except:
-        flash("The city you entered is incorrect or does not exist on our database, Please try again!")
+        flash("The city you entered is incorrect or does not exist on our database, Please try again!",'danger')
         return redirect(url_for('index'))
         
     else:
+
+        icon_id = data['weather'][0]['icon']
         weather = {
         'city':data['name'],
+        'temperature':data['main']['temp'],
+        'description':data['weather'][0]['description'],
+        
+        'country':data['sys']['country'],
+        'timezone':data['timezone'], 
+        'icon': f'http://openweathermap.org/img/w/{icon_id}.png'      
+        
     }
-        flash(f"Welcome, You are logged in from {current_location.get('city')}, {current_location.get('country')}",'info')
-    return render_template('index.html',weather=weather)
+
+    return render_template('index.html',weather=weather, current_location = current_location)
 
         
-              
-              
-                # flash(f'Your city is {weather}','info')         
-        
-
-       
-
-        
-      
-            
-
-         
-            #  flash('success')
-            
-
-
-    # city = get_city_name()
-    
-    # 
-
-    # 
-
-    # data = r.json()
-
-
-    # icon_id = data['weather'][0]['icon']
-    # weather = {
-    
-    # 'city':data['name'],
-    # 'temperature':data['main']['temp'],
-    # 'description':data['weather'][0]['description'],
-    
-    # 'country':data['sys']['country'],
-    # 'timezone':data['timezone'], 
-    # 'icon': f'http://openweathermap.org/img/w/{icon_id}.png'      
-    # } 
-
-    # return render_template('index.html',title = 'index',weather = weather)
+   
+  
 
 
 

@@ -2,12 +2,16 @@
 
 {%block content%}
 
+
+
+
 {%with messages = get_flashed_messages(with_categories = true) %}
 {%if messages%}
 {%for category, message in messages%}
-<div class="container d-flex justify-content-center alert alert-{{category}} p-auto text-wrap"
-    style="width:600px;height:35px">
-    <p class=" text-small p-0 m-0 align-middle "> {{message}}
+<div id="hideMeAfter5Seconds"
+    class="container d-flex justify-content-center alert alert-{{category}} mt-3 mb-0 p-auto text-wrap"
+    style="width:500px;height:35px">
+    <p class="text-small p-0 m-0 align-middle "> {{message}}
     </p>
 </div>
 {%endfor%}
@@ -18,8 +22,8 @@
 
 
 
-<div class="container s1 m-auto border-rounded-5">
-    <div class="row">
+<div class="container-parent p-0 my-4 s1 border-rounded-5">
+    <div class="row mt-3">
 
         <div class="col-sm-3">
             <div class="row m-auto">
@@ -40,18 +44,26 @@
 
 
                 <div class="card my-4">
-                    <div class="location">
+                    <div class="d-flex justify-content-center">
+
                         <h5>{{weather.city}}</h5>
+                        <div class="d-flex justify-content-left">
+                            <img src="{{weather.icon}}">
+                        </div>
+
                     </div>
+
+
                     <div class="d-flex">
                         <div class="temperature display-6">{{weather.temperature}}</div>
                         <div class="unit display">&#176{{weather.unit}}</div>
-                        <div class="weather-icon mx-auto">
-                            <img src="{{weather.icon}}">
-                        </div>
+
                     </div>
                     <div class="weather-description mx-auto text-small">{{weather.description}}</div>
                 </div>
+
+
+
 
             </div>
 
@@ -84,8 +96,13 @@
         <div class="col-sm-3">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title mb-3">Daily Weather Forcast Notification</h5>
-                    <p class="card-text text-small">Would you like to recieve a daily weather forcast from us? Subscribe
+                    <p class="mb-1 text-xlarge text-success font-weight-bold p-0 m-0">Welcome!</p>
+                    <p class="card-title mb-3 text-medium text-success">You are currently logged in from
+                        {{current_location.city}} ,
+                        {{current_location.country}}</p>
+                    <hr>
+                    <p class="card-text text-muted text-small">Would you like to recieve a daily weather forcast from
+                        us? Subscribe
                         below</p>
                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal"
                         data-whatever="@mdo">Subscribe</button>
