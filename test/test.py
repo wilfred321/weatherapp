@@ -177,14 +177,13 @@
 # _,lastname = fullname.('/')
 # print(lastname)
 
-# def switch_metric():
-#     switcher = {
-#         'metric':'Celcius ',
-#         'standard':'Kelvin',
-#         'imperial':'Farenheit',
-#     }  
+def get_metric(unit= 'metric'):
+    switcher = {
+        'metric':'Celcius ',
+        'standard':'Kelvin',
+        'imperial':'Farenheit',
+    }  
 
-#     return switcher
+    return switcher.get(unit,'metric')
 
-# units = switch_metric()
-# print(units.get('metric'))
+print(get_metric())
