@@ -4,7 +4,7 @@ from requests import status_codes
 from weatherapp import weather_app,requests,json,request
 from flask import render_template,redirect,request,url_for,flash
 from weatherapp.config import Config
-from weatherapp.utils import get_current_location, get_metric,send_subscribe_confirm
+from weatherapp.utils import get_current_location, get_metric,save_email,send_subscribe_confirm,save_email
 
 
 # @weather_app.route("/search", methods = ['GET','POST'])
@@ -21,28 +21,41 @@ from weatherapp.utils import get_current_location, get_metric,send_subscribe_con
 apiid = weather_app.config['WEATHER_API_KEY']
 current_location = get_current_location()
 
+
+@weather_app.route('/preferences',methods = ['GET','POST'])
+def preferences():
+    if request.method == 'POST':
+        #get the metric option 
+        option = request.form.get('temperature_preference')  
+        return redirect(url_for('index',option=option))  
+    pass
+
+
+
+
 @weather_app.route("/", methods = ['GET','POST'])
 def index():
 
-    option = request.args.get('option')
+    # option = request.args.get('option')
 
-    if option == None:
-        unit = 'metric'
-    unit_name = get_metric(unit)
-        
-    
+    # if option == None:
+    #     unit = 'metric'
+    # unit_name = get_metric(unit)
 
 
     city = current_location.get('city')
     if request.method == "POST":
         city = request.form.get('city')
-        # if city == "" or len(city) > 15:
-        #     flash(f'Search field cannot be blank or more than 15 letters','danger')
-        #     return redirect(url_for('index'))
+        if city == "" or len(city) > 15:
+            flash(f'Search field cannot be blank or more than 15 letters','danger')
+            return redirect(url_for('index'))
 
     try:
 
         url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid={}&units={}'
+
+        option = request.args.get('option')
+        unit = 'metric'
         r = requests.get(url.format(city,apiid,unit))
         data = r.json()
         city = data['name']
@@ -61,18 +74,14 @@ def index():
         'country':data['sys']['country'],
         'timezone':data['timezone'], 
         'icon': f'http://openweathermap.org/img/w/{icon_id}.png',
-        'unit':unit_name     
+        # 'unit':unit_name 
+        'unit':get_metric(option)    
         
     }
 
-    return render_template('index.html',weather=weather, current_location = current_location)
+        return render_template('index.html',weather=weather, current_location = current_location)
 
-@weather_app.route('/preferences',methods = ['GET','POST'])
-def preferences():
-    if request.method == 'POST':
-        #get the metric option 
-        option = request.form.get('temperature_preference')  
-        return redirect(url_for('index',option=option))   
+ 
    
   
 
@@ -96,10 +105,21 @@ def subscribe():
     subscriber_email = request.form.get('subscriber-email')
     firstname,lastname = subscriber_username.capitalize().split(' ')
     
-    send_subscribe_confirm(firstname,subscriber_email)
-    # save_to_mailing_list()
-    flash('You subscription has been completed successfully','info')
+    try:
+        save_email(subscriber_email)
+    except:
+        flash('Your email could not be saved. It may already exist','danger')
+
+    else:
+        send_subscribe_confirm(firstname,subscriber_email)
+        flash('You subscription has been completed successfully','info')
     return redirect(url_for('index'))
+    
+        
+    
+       
+    # save_to_mailing_list()
+       
     
 
     

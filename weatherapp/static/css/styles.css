@@ -124,3 +124,8 @@ body {
       height: 0;
     }
   }
+
+  .copyright{
+      height:30px;
+      font-weight: 30px;
+  }

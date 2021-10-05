@@ -53,7 +53,19 @@ def send_subscribe_confirm(username,email):
     smtp = connect_mail_server()
     smtp.send_message(mail)
         
-    
+def save_email(email):
+
+    with open('mailing_list.txt','r+') as f:
+        file = f.read()
+        if email not in file:
+            f.write(email)
+            f.write('\n') 
+        
+
+            
+            
+            
+
          
 def get_metric(option):
     switcher = {
@@ -63,6 +75,8 @@ def get_metric(option):
     }  
 
     return switcher.get(option,'metric')
+
+
 
 
 # def get_city_name():

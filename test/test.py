@@ -177,13 +177,29 @@
 # _,lastname = fullname.('/')
 # print(lastname)
 
-def get_metric(unit= 'metric'):
-    switcher = {
-        'metric':'Celcius ',
-        'standard':'Kelvin',
-        'imperial':'Farenheit',
-    }  
+# def get_metric(unit= 'metric'):
+#     switcher = {
+#         'metric':'Celcius ',
+#         'standard':'Kelvin',
+#         'imperial':'Farenheit',
+#     }  
 
-    return switcher.get(unit,'metric')
+#     return switcher.get(unit,'metric')
 
-print(get_metric())
+# print(get_metric())
+from os import abort
+
+
+email = 'wiasfdlffk@asfdlfkj.com'
+
+def save_email(email):
+
+    with open('..\mailing_list.txt','r+') as f:
+        file = f.read()
+        if email not in file:
+            f.write(email)
+            f.write('\n')
+           
+        
+
+save_email(email)
