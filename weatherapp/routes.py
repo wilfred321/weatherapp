@@ -80,8 +80,9 @@ def subscribe():
     
     subscriber_username = request.form.get('subscriber-username')
     subscriber_email = request.form.get('subscriber-email')
-
-    send_subscribe_confirm(subscriber_username,subscriber_email)
+    firstname,lastname = subscriber_username.capitalize().split(' ')
+    
+    send_subscribe_confirm(firstname,subscriber_email)
     # save_to_mailing_list()
     flash('You subscription has been completed successfully','info')
     return redirect(url_for('index'))

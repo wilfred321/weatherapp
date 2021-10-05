@@ -154,7 +154,7 @@
 # print(org)
 # print(city)
 
-import requests
+# import requests
 # def get_city_name():
 #     url = "http://ipinfo.io/json"
 #     try:
@@ -171,4 +171,8 @@ import requests
 
 
 
-print(get_city_name())
+# print(get_city_name())
+
+fullname = 'Wilfred Owobu'
+_,lastname = fullname.('/')
+print(lastname)
