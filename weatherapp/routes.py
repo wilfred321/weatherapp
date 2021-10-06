@@ -1,10 +1,11 @@
 
 from logging import raiseExceptions
 from requests import status_codes
-from weatherapp import weather_app,requests,json,request
+from weatherapp import weather_app,requests,json,request,db
 from flask import render_template,redirect,request,url_for,flash
 from weatherapp.config import Config
-from weatherapp.utils import get_current_location, get_metric,save_email,send_subscribe_confirm,save_email
+from weatherapp.models import City
+from weatherapp.utils import get_current_location, get_metric, get_weather, make_api_call,save_email,send_subscribe_confirm,save_email
 
 
 # @weather_app.route("/search", methods = ['GET','POST'])
@@ -41,7 +42,7 @@ def index():
     # if option == None:
     #     unit = 'metric'
     # unit_name = get_metric(unit)
-
+    
 
     city = current_location.get('city')
     if request.method == "POST":
@@ -55,7 +56,7 @@ def index():
         url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid={}&units={}'
 
         option = request.args.get('option')
-        unit = 'metric'
+        unit = option
         r = requests.get(url.format(city,apiid,unit))
         data = r.json()
         city = data['name']
@@ -78,9 +79,24 @@ def index():
         'unit':get_metric(option)    
         
     }
+    
+       
+        return render_template('index.html',weather=weather,current_location = current_location)
 
-        return render_template('index.html',weather=weather, current_location = current_location)
+@weather_app.route('/favorite-cities', methods = ['GET','POST'])
+def fav_cities():
+    cities = City.query.all()
 
+    weather_data = []
+    for city in cities:
+        unit= 'metric'
+        data = make_api_call(city.name,apiid,unit)
+        icon_id = data['weather'][0]['icon']
+        weather = get_weather(data,icon_id)
+        weather_data.append(weather)
+        
+        
+    return render_template('favorite_cities.html',weather_data=weather_data)
  
    
   
@@ -88,9 +104,29 @@ def index():
 
 
 
-@weather_app.route("/register")
-def register():
-    return render_template('register.html',title = 'register')
+@weather_app.route("/add-favorite-city",methods = ['GET','POST'])
+def add_city():
+
+    if request.method !='POST':
+
+         return render_template('add_city.html', title = "add city")
+    else:
+         
+        city = request.form.get('city')
+        
+        #query the weather api with this new city
+        unit = 'metric'
+        data = make_api_call(city,apiid,unit)
+        
+        icon_id = data['weather'][0]['icon']
+        weather_data = get_weather(data,icon_id)
+        new_city_object = City(name = weather_data['city'])
+        db.session.add(new_city_object)
+        db.session.commit()
+        flash("City has been added to your list",'success')
+        return redirect(url_for('index'))
+    
+        # return render_template('add_city.html', title = "add city",city=city_name)
 
 @weather_app.route("/register")
 def download():
