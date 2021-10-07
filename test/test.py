@@ -187,19 +187,25 @@
 #     return switcher.get(unit,'metric')
 
 # print(get_metric())
-from os import abort
+# from os import abort
 
 
-email = 'wiasfdlffk@asfdlfkj.com'
+# email = 'wiasfdlffk@asfdlfkj.com'
 
-def save_email(email):
+# def save_email(email):
 
-    with open('..\mailing_list.txt','r+') as f:
-        file = f.read()
-        if email not in file:
-            f.write(email)
-            f.write('\n')
+#     with open('..\mailing_list.txt','r+') as f:
+#         file = f.read()
+#         if email not in file:
+#             f.write(email)
+#             f.write('\n')
            
         
 
-save_email(email)
+# save_email(email)
+
+
+def greet(name):
+    print( f"Hello {name}")
+
+greet('wilfred')
