@@ -208,10 +208,10 @@
 # greet('wilfred')
 
 
-import os
-import requests
-import json
-r = requests.get('http://api.ipify.org')
+# import os
+# import requests
+# import json
+# r = requests.get('http://api.ipify.org')
 
 
 
@@ -219,25 +219,80 @@ r = requests.get('http://api.ipify.org')
 # IPAddr = socket.gethostbyname(hostname)
 # print(IPAddr)
 # print(hostname)
-IPAddr = r.text
-query = IPAddr
-fields = [
+# IPAddr = r.text
+# query = IPAddr
+# fields = [
     
-    "countryCode"
-    "region",
+#     "countryCode"
+#     "region",
    
-    "city",
+#     "city",
     
    
-]
+# ]
 
-url = f"http://ip-api.com/json/{query}?={fields}"
+# url = f"http://ip-api.com/json/{query}?={fields}"
 
-r = requests.get(url)
-data = r.json()
-print(data['org'])
-print(data['country'])
-print(data['countryCode'])
-print(data['city'])
+# r = requests.get(url)
+# data = r.json()
+# print(data['org'])
+# print(data['country'])
+# print(data['countryCode'])
+# print(data['city'])
 
+
+
+# from pathlib import Path
+# import requests
+# url = Path('/test/flask_blog.pdf')
+# # url = Path('/test')
+# # response = requests.get(url)
+# # response.write_bytes(response.content)
+# file = open(url,'wb')
+# print(file.write)
+
+# import os
+# import smtplib
+# from email.mime.multipart import MIMEMultipart
+# from email.mime.text import MIMEText
+# from email.mime.image import MIMEImage
+# from pathlib import Path
+# from string import Template
+
+# template = Template(Path('template.html').read_text())
+# # template.substitute()
+
+
+
+# EMAIL_USER = os.getenv('EMAIL_USER')
+# EMAIL_PASSWORD = os.getenv('EMAIL_PASS')
+
+# message = MIMEMultipart()
+# message['from'] = EMAIL_USER
+# message['to'] = 'owobuwilfred@gmail.com'
+# message['subject'] = 'This is a test!'
+# body = template.substitute({'name':'john'})
+# message.attach(MIMEText(body,"html"))
+# message.attach(MIMEImage(Path("profile_pic.jpeg").read_bytes()))
+
+
+# with smtplib.SMTP(host = 'smtp.gmail.com',port = 587) as smtp:
+#     smtp.ehlo()
+#     smtp.starttls()
+#     smtp.login(EMAIL_USER,EMAIL_PASSWORD)
+#     smtp.send_message(message)
+#     print("SENT...")
+
+
+# def get_metric(option):
+#     switcher = {
+#          'metric':'Celcius ',
+#          'standard':'Kelvin',
+#          'imperial':'Farenheit',
+#     }  
+
+#     return switcher.get(option,'metric')
+option = None
+unit = option if option !=None else option
+print(unit)
 

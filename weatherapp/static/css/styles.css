@@ -1,8 +1,7 @@
 
 body {
     margin: auto;
-    margin-top: 30px;
-    width: 70%;
+    width: 80%;
 
 }
 
@@ -75,6 +74,13 @@ body {
 
  .s1 {
     background-color: #fafafa
+}
+
+.s2{
+    background-color: teal;
+}
+.s3{
+    color:teal;
 }
 
 .weather-icon{

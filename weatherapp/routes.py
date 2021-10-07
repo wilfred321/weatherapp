@@ -1,7 +1,7 @@
 
 from logging import raiseExceptions
 from requests import status_codes
-from weatherapp import weather_app,requests,json,request,db
+from weatherapp import weather_app,requests,json,request,db,session
 from flask import render_template,redirect,request,url_for,flash
 from weatherapp.config import Config
 from weatherapp.models import City
@@ -31,23 +31,18 @@ def base():
 def preferences():
     if request.method == 'POST':
         #get the metric option 
-        option = request.form.get('temperature_preference')  
-        return redirect(url_for('index',option=option))  
-    pass
+        option = request.form.get('temp_pref') 
+        session['option'] = option
+    return redirect(url_for('index'))  
+    
 
 
 
 
 @weather_app.route("/", methods = ['GET','POST'])
 def index():
-
-    # option = request.args.get('option')
-
-    # if option == None:
-    #     unit = 'metric'
-    # unit_name = get_metric(unit)
-    
-
+    # unit = request.args.get('option')
+    unit = session.get('option','metric')
     city = current_location.get('city')
     if request.method == "POST":
         city = request.form.get('city')
@@ -59,8 +54,8 @@ def index():
 
         url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid={}&units={}'
 
-        option = request.args.get('option')
-        unit = option
+        # option = request.args.get('option')
+        # unit = option
         r = requests.get(url.format(city,apiid,unit))
         data = r.json()
         city = data['name']
@@ -80,7 +75,7 @@ def index():
         'timezone':data['timezone'], 
         'icon': f'http://openweathermap.org/img/w/{icon_id}.png',
         # 'unit':unit_name 
-        'unit':get_metric(option)    
+        'unit':get_metric(unit)    
         
     }
     
