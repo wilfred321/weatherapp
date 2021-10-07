@@ -6,17 +6,30 @@ token = weather_app.config['IP_INFO_KEY']
 
 def get_current_location():
     url = f"http://ipinfo.io/json?token={token}"
+    url2 = 'http://api.ipify.org'
     try:
-        response = requests.get(url)
+        response = requests.get(url2)
     except Exception:
             return "Error: Unable to execute request"
     else:
-        data = response.json()
+        # data = response.json()
+        IPAddr = response.text
 
+        query = IPAddr
+        fields = [
+             "countryCode"
+            "region",
+             "city",
+                    ]
+
+        url = f"http://ip-api.com/json/{query}?={fields}"
+
+        r = requests.get(url)
+        data = r.json()
         location = {
-            'city':data['region'],
-            'country':data['country']
-            }
+                    'city':data['city'],
+                    'country':data['country']
+                    }
 
         return location
 

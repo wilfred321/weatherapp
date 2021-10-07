@@ -104,15 +104,15 @@
 
 # hostname = socket.gethostname()
 # IPAddr = socket.gethostbyname(hostname)
-# print(IPAddr)
-# print(hostname)
+# # print(IPAddr)
+# # print(hostname)
 
 # query = IPAddr
 # fields = [
 #     "status",
 #     "message",
 #     "country",
-#     "countryCode",
+#     "countryCode"
 #     "region",
 #     "regionName",
 #     "city",
@@ -130,10 +130,7 @@
 
 # r = requests.get(url)
 # data = r.json()
-# print(type(data))
-# for key, value in enumerate(data):
-#     print(f"{key} = {data}")
-
+# print(data)
 
 # response = requests.get(url)
 # print(response.status_code)
@@ -205,7 +202,42 @@
 # save_email(email)
 
 
-def greet(name):
-    print( f"Hello {name}")
+# def greet(name):
+#     print( f"Hello {name}")
 
-greet('wilfred')
+# greet('wilfred')
+
+
+import os
+import requests
+import json
+r = requests.get('http://api.ipify.org')
+
+
+
+# hostname = socket.gethostname()
+# IPAddr = socket.gethostbyname(hostname)
+# print(IPAddr)
+# print(hostname)
+IPAddr = r.text
+query = IPAddr
+fields = [
+    
+    "countryCode"
+    "region",
+   
+    "city",
+    
+   
+]
+
+url = f"http://ip-api.com/json/{query}?={fields}"
+
+r = requests.get(url)
+data = r.json()
+print(data['org'])
+print(data['country'])
+print(data['countryCode'])
+print(data['city'])
+
+
