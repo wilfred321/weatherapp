@@ -1,0 +1,21 @@
+{%extends 'base.html'%}
+{%block content%}
+
+<div class="container">
+    <div class="display-6  my-2">Add Your Favorite City</div>
+    <div>
+        <hr clas>
+    </div>
+    <h1>{{weather_data}}</h1>
+    <div class="container my-4">
+
+        <form class="form-inline my-4 my-lg-0" action="{{url_for('add_city')}}" method='post'>
+            <input class="form-control mr-sm-2" name='city' type="search" placeholder="Enter a city name"
+                aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add City</button>
+        </form>
+    </div>
+
+</div>
+</div>
+{%endblock%}
