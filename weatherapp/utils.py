@@ -83,7 +83,7 @@ def save_email(email):
          
 def get_metric(option):
     switcher = {
-         'metric':'Celcius ',
+         'metric':'Celcius',
          'standard':'Kelvin',
          'imperial':'Farenheit',
     }  
