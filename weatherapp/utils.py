@@ -60,8 +60,7 @@ def save_email(email):
         if email not in file:
             f.write(email)
             f.write('\n') 
-        else:
-            print("email already exists")
+        
 
             
             
@@ -78,30 +77,6 @@ def get_metric(option):
     return switcher.get(option,'metric')
 
 
-
-def get_weather(data,icon_id):
-   
-    weather = {
-   
-    'city':data['name'],
-    'temperature':data['main']['temp'],
-    'description':data['weather'][0]['description'],
-    'id':data['weather'][0]['id'],
-    'icon': f'http://openweathermap.org/img/w/{icon_id}.png',
-    'country':data['sys']['country']  
-    }
-    return weather
-
-def make_api_call(city,apiid,unit):
-    try:
-        url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid={}&units={}'
-       
-        r=requests.get(url.format(city,apiid,unit))
-        data = r.json()
-    except:
-        print("api call not successful")
-    else:
-        return data
 
 
 # def get_city_name():
