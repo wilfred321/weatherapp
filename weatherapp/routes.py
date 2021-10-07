@@ -23,6 +23,10 @@ apiid = weather_app.config['WEATHER_API_KEY']
 current_location = get_current_location()
 
 
+@weather_app.route('/base',methods = ['POST','GET'])
+def base():
+    return render_template('base.html',title = 'Weatherapp')
+
 @weather_app.route('/preferences',methods = ['GET','POST'])
 def preferences():
     if request.method == 'POST':
@@ -89,9 +93,11 @@ def fav_cities():
 
     weather_data = []
     for city in cities:
+
         unit= 'metric'
         data = make_api_call(city.name,apiid,unit)
         icon_id = data['weather'][0]['icon']
+
         weather = get_weather(data,icon_id)
         weather_data.append(weather)
         
@@ -108,7 +114,6 @@ def fav_cities():
 def add_city():
 
     if request.method !='POST':
-
          return render_template('add_city.html', title = "add city")
     else:
          
@@ -116,17 +121,58 @@ def add_city():
         
         #query the weather api with this new city
         unit = 'metric'
-        data = make_api_call(city,apiid,unit)
-        
-        icon_id = data['weather'][0]['icon']
-        weather_data = get_weather(data,icon_id)
-        new_city_object = City(name = weather_data['city'])
-        db.session.add(new_city_object)
-        db.session.commit()
-        flash("City has been added to your list",'success')
-        return redirect(url_for('index'))
-    
+
+        #clean the user input
+        if city == None or len(city) > 15:
+            flash("Please enter a valid city name",'danger')
+            return redirect(url_for('add_city'))
+        else:
+
+            try:    
+                data = make_api_call(city,apiid,unit)
+                icon_id = data['weather'][0]['icon']
+            except KeyError as e:
+                flash('Key error occured','danger')
+                return redirect(url_for('add_city'))
+            else:
+                weather_data = get_weather(data,icon_id)
+                # if db.query(city.id).filter(city.name == weather_data['city'],city.type==weather_data['city'].type):
+                cities = City.query.all()
+
+                if len(cities) == 4:
+                    flash("List is full, Please delete a city to be able to add another!",'info')
+                    return redirect(url_for("add_city"))
+                else:
+
+                    for city in cities:
+                        if city.name == weather_data['city']:
+                            flash("City already exist in your favorite cities list",'danger')
+                            return redirect(url_for('add_city'))
+                    else: 
+                        
+                        new_city_object = City(name = weather_data['city'])
+                    # if new_city_object in City.query.filter_by(name = weather_data['city']):     
+                        db.session.add(new_city_object)
+                        db.session.commit()
+                        flash("City has been added to your list",'success')
+                        return redirect(url_for('fav_cities'))
+            
+
+
         # return render_template('add_city.html', title = "add city",city=city_name)
+        UserImage.query.filter(UserImage.user_id == 1).count()
+
+
+@weather_app.route('/remove-city<string:city_id>', methods = ['GET','POST'])
+def remove_city(city_id):
+   city = City.query.filter_by(name = city_id).first()
+   if city:
+       db.session.delete(city)
+       db.session.commit()
+       flash(f'{city.name} was successfully deleted from your favorite cities','success')
+       return redirect(url_for('fav_cities'))
+
+
 
 @weather_app.route("/register")
 def download():

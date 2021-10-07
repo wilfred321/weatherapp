@@ -5,18 +5,7 @@
 
 
 
-{%with messages = get_flashed_messages(with_categories = true) %}
-{%if messages%}
-{%for category, message in messages%}
-<div id="hideMeAfter5Seconds"
-    class="container d-flex justify-content-center alert alert-{{category}} mt-3 mb-0 p-auto text-wrap"
-    style="width:500px;height:35px">
-    <p class="text-small p-0 m-0 align-middle "> {{message}}
-    </p>
-</div>
-{%endfor%}
-{%endif%}
-{%endwith%}
+
 
 
 
@@ -28,39 +17,26 @@
         <div class="col-sm-3">
             <div class="row m-auto">
 
-                <div class="card">
-                    <div class="location">
-                        <h5>{{weather.city}}</h5>
+                <div class="media border bg-white ">
+                    <img class="align-self-center mr-3" src="{{weather.icon}}" alt="Generic placeholder image">
+                    <div class="media-body">
+                        <h5 class="mt-0">{{weather.city}}, <small> {{weather.country}}</small></h5>
+
+                        <p class="display-6">{{weather.temperature}}</p>
+                        <p class="mb-0">{{weather.unit}}</p>
+                        <p class="text-muted">{{weather.description}}</p>
                     </div>
-                    <div class="d-flex">
-                        <div class="temperature display-6">{{weather.temperature}}</div>
-                        <div class="unit display">&#176{{weather.unit}}</div>
-                        <div class="weather-icon mx-auto">
-                            <img src="{{weather.icon}}">
-                        </div>
-                    </div>
-                    <div class="weather-description mx-auto text-small">{{weather.description}}</div>
+                </div>
+
+                <div class="d-flex container p-2 m-0 justify-content-center">
+                    <a type="button" href="{{url_for('add_city')}}"
+                        class=" align-right btn btn-outline-primary btn-md">Add to
+                        Favorite
+                        City</a>
                 </div>
 
 
-                <div class="card my-4">
-                    <div class="d-flex justify-content-center">
 
-                        <h5>{{weather.city}}</h5>
-                        <div class="d-flex justify-content-left">
-                            <img src="{{weather.icon}}">
-                        </div>
-
-                    </div>
-
-
-                    <div class="d-flex">
-                        <div class="temperature display-6">{{weather.temperature}}</div>
-                        <div class="unit display">&#176{{weather.unit}}</div>
-
-                    </div>
-                    <div class="weather-description mx-auto text-small">{{weather.description}}</div>
-                </div>
 
 
 
@@ -75,17 +51,18 @@
         <div class="col-sm-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Daily Weather Forcast Notification</h5>
-                    <p class="card-text">Would you like to recieve a daily weather forcast from us?
-                        Subscribe
+                    <h5 class="card-title">Your Weather Daily Breifng</h5>
+                    <p class="card-text">
                         below. This Appication is a one stop shop for all the information you need to have a
                         productive
                         day every day.</p>
                     <p class="card-text">We Provide all the information you need covering weather forcast,
-                        exchange rate and calender
+                        exchange rate and your calender events
                         events</p>
                     <a href="{{url_for('download')}}" type="button" class="btn btn-primary btn-sm">Click to learn
                         more</a>
+
+
 
 
                 </div>
@@ -155,8 +132,7 @@
     </div>
 </div>
 
-<div class="heading display-6 ">Added Locations</div>
-
+<div class="heading display-6 ">Add Locations</div>
 <div class="container border">
 
     <div class="row my-2">

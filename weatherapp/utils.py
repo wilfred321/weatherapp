@@ -86,6 +86,7 @@ def get_weather(data,icon_id):
     'city':data['name'],
     'temperature':data['main']['temp'],
     'description':data['weather'][0]['description'],
+    'id':data['weather'][0]['id'],
     'icon': f'http://openweathermap.org/img/w/{icon_id}.png',
     'country':data['sys']['country']  
     }
