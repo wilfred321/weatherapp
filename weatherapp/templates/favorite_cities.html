@@ -4,10 +4,14 @@
 {%block content%}
 
 <div class="heading display-6 ">Favorite Cities</div>
-
+{%if weather_data|length%}
 <div class="d-flex my-5 justify-content-center">
     <a href="{{url_for('add_city')}}" class="btn btn-primary btn-md">Add City</a>
 </div>
+{%else%}
+
+{%endif%}
+
 <div class="container border">
 
     <div class="row my-4">

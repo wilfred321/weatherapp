@@ -284,15 +284,15 @@
 #     print("SENT...")
 
 
-# def get_metric(option):
+# def get_metric(option, default = 'metric'):
 #     switcher = {
 #          'metric':'Celcius ',
 #          'standard':'Kelvin',
 #          'imperial':'Farenheit',
 #     }  
 
-#     return switcher.get(option,'metric')
-option = None
-unit = option if option !=None else option
-print(unit)
+#     return switcher.get(option,'celcius')
+# option = get_metric('great')
+# unit = option if option !=None else "Hello"
+# print(unit)
 

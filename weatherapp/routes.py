@@ -155,7 +155,7 @@ def add_city():
 
 
         # return render_template('add_city.html', title = "add city",city=city_name)
-        UserImage.query.filter(UserImage.user_id == 1).count()
+        # UserImage.query.filter(UserImage.user_id == 1).count()
 
 
 @weather_app.route('/remove-city<string:city_id>', methods = ['GET','POST'])
@@ -164,7 +164,8 @@ def remove_city(city_id):
    if city:
        db.session.delete(city)
        db.session.commit()
-       flash(f'{city.name} was successfully deleted from your favorite cities','success')
+       city = (city.name).capitalize()
+       flash(f'{city}. city was successfully deleted from your favorite cities','success')
        return redirect(url_for('fav_cities'))
 
 
